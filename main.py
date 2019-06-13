@@ -1,26 +1,32 @@
 from praw.models import MoreComments
-import login,time,os
+import login,time
 reddit=login.reddit
+
 log=open("log.txt","w+")
 info="""
 \n
 \n
 \n
 
-^(ben bot| [kod](https://www.github.com/kaansenol5/OwoYapar2023))
+^(ben bot | [github](https://www.github.com/kaansenol5/OwoYapar2023)) \n
+\n
+^(owofier geri dönecek demiştim...)
 """
 def reply(content,info):
     new=content.replace("r","w").replace("l","w").replace("v","w").replace("R","W").replace("L","W") + info
     return new
 
 subreddit=reddit.subreddit("kopyamakarna")
+
+
+
 while True:
     for submission in subreddit.new():
         toReply=True
         for top_level_comment in submission.comments:
             if isinstance(top_level_comment, MoreComments):
                 continue
-            if top_level_comment.author=="OwoYapar2023":
+            if top_level_comment.author=="OwoYapar2023" or submission.selftext=='':
                 toReply=False
                 print("PASSED "+ submission.url)
                 log.write("PASSED "+ submission.url+"\n")
@@ -36,5 +42,5 @@ while True:
                 time.sleep(60)
             except KeyboardInterrupt:
                 log.close()
-                os.rename("log.txt","oldlog.txt")
+
                 exit()
