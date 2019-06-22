@@ -26,6 +26,8 @@ while True:
         for top_level_comment in submission.comments:
             if isinstance(top_level_comment, MoreComments):
                 continue
+            if not submission.is_self:
+                toReply=False
             if top_level_comment.author=="OwoYapar2023" or submission.selftext=='':
                 toReply=False
                 print("PASSED "+ submission.url)
