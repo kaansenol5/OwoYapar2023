@@ -1,6 +1,17 @@
 from praw.models import MoreComments
-import login,time
-reddit=login.reddit
+import time, json, praw
+
+keyfile = open("keys.json")
+keys = json.load(keyfile)
+
+reddit = praw.Reddit(
+    client_id=keys["key"],
+    client_secret=keys["secret"],
+    user_agent="owoyapar bot",
+    username=keys["username"],
+    password=keys["password"]
+)
+
 
 log=open("log.txt","w+")
 info="""
